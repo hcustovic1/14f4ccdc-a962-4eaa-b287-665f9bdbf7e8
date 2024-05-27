@@ -1,4 +1,4 @@
-export type Fetch = typeof fetch;
+import { Fetch } from '@/types';
 
 export const fetchCountries = async (fetch: Fetch) => {
   const response = await fetch(process.env.NEXT_PUBLIC_COUNTRIES_API);
