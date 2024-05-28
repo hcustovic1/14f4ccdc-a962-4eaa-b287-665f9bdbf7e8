@@ -1,15 +1,21 @@
-import { fetchCountries } from '@/api/fetchCountries';
-import { useLocalizationStore } from '@/store/useLocalizationStore';
 import { useState, useEffect } from 'react';
+import { fetchCountries } from '@/api/fetchCountries';
+import { Country } from '@/types';
 
-export const useFetchCountries = () => {
-  const { countries, setCountries } = useLocalizationStore();
+interface UseFetchCountriesResult {
+  countries: Country[];
+  error: Error | null;
+  loading: boolean;
+}
+
+export const useFetchCountries = (): UseFetchCountriesResult => {
+  const [countries, setCountries] = useState<Country[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchCountriesData = async () => {
-      if (!!countries.length || loading) return;
+    const fetchData = async () => {
+      if (countries?.length || loading) return;
 
       setLoading(true);
 
@@ -23,8 +29,8 @@ export const useFetchCountries = () => {
       }
     };
 
-    fetchCountriesData();
-  }, [countries, setCountries, loading]);
+    fetchData();
+  }, [countries, loading]);
 
   return { countries, error, loading };
 };

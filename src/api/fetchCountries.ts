@@ -1,6 +1,6 @@
-import { Fetch } from '@/types';
+import { Country, Fetch } from '@/types';
 
-export const fetchCountries = async (fetch: Fetch) => {
+export const fetchCountries = async (fetch: Fetch): Promise<Country[]> => {
   const response = await fetch(process.env.NEXT_PUBLIC_COUNTRIES_API);
 
   if (!response.ok) {
