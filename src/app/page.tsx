@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-      {loading && (
+      {!error && loading && (
         <div
           className="flex justify-center align-middle"
           role="status"

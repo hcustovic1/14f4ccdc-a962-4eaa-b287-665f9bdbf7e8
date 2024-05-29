@@ -15,7 +15,7 @@ export const useFetchCountries = (): UseFetchCountriesResult => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (countries?.length || loading) return;
+      if (countries?.length || loading || error) return;
 
       setLoading(true);
 
