@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import Tabs from './Tabs';
 import { describe, expect, it, vi } from 'vitest';
+import { Tabs } from './Tabs';
 
 describe('<Tabs />', () => {
   it('renders tabs correctly', () => {

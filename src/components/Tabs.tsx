@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 interface TabsProps {
   tabs: string[];
   onSelectTab: (tab: string) => void;
-  initialActiveTab: string | null;
+  initialActiveTab?: string;
 }
 
 export const Tabs: React.FC<TabsProps> = ({
@@ -11,7 +11,9 @@ export const Tabs: React.FC<TabsProps> = ({
   onSelectTab,
   initialActiveTab,
 }) => {
-  const [activeTab, setActiveTab] = useState<string | null>(initialActiveTab);
+  const [activeTab, setActiveTab] = useState<string | undefined>(
+    initialActiveTab
+  );
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
