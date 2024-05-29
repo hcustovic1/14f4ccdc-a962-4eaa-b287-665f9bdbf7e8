@@ -21,7 +21,7 @@ export const Tabs: React.FC<TabsProps> = ({
   };
 
   return (
-    <nav className="flex space-x-4 justify-between" aria-label="Tabs">
+    <nav className="flex space-x-4 py-1 justify-around" aria-label="Tabs">
       {tabs.map((tab) => (
         <button
           key={tab}
