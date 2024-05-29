@@ -14,6 +14,7 @@ export const NavigationBar: React.FC = () => {
       <div className="relative">
         <button
           className="flex items-center"
+          aria-label="Toggle language picker"
           onClick={() => setShouldShowLanguagePicker(!shouldShowLanguagePicker)}
         >
           <Image
