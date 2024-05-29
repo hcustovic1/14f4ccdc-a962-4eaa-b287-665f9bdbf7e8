@@ -17,11 +17,11 @@ export const NavigationBar: React.FC = () => {
           onClick={() => setShouldShowLanguagePicker(!shouldShowLanguagePicker)}
         >
           <Image
-            className="mr-2"
             src={getCountryFlagUrl(language)}
             alt={language as string}
-            width={25}
-            height={25}
+            width="0"
+            height="0"
+            className="w-5 h-auto mr-2"
           />
           {language}
         </button>

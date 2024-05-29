@@ -16,7 +16,7 @@ export const LanguagePickerWithTabs: React.FC<LanguagePickerProps> = ({
   const [filteredCountries, setFilteredCountries] = useState<Country[] | null>(
     null
   );
-  const { language, countries, setLanguage } = useLocalizationStore();
+  const { language, setLanguage } = useLocalizationStore();
 
   useEffect(() => {
     if (activeRegion) {
@@ -52,10 +52,7 @@ export const LanguagePickerWithTabs: React.FC<LanguagePickerProps> = ({
       <Tabs
         tabs={Object.keys(groupedCountries)}
         onSelectTab={handleTabSelect}
-        initialActiveTab={
-          countries?.find((country) => country['alpha-2'] === language)
-            ?.region || null
-        }
+        initialActiveTab={activeRegion || undefined}
       />
       <div className="relative">
         <div
@@ -87,8 +84,9 @@ export const LanguagePickerWithTabs: React.FC<LanguagePickerProps> = ({
                     <Image
                       src={getCountryFlagUrl(country?.['alpha-2'])}
                       alt={`Flag of ${country.name}`}
-                      width={25}
-                      height={25}
+                      width="0"
+                      height="0"
+                      className="w-5 h-auto"
                     />
                     <span className="truncate">{country.name}</span>
                   </button>
