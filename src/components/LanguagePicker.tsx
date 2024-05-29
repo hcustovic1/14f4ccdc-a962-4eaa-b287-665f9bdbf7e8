@@ -13,8 +13,10 @@ const LanguagePickerWithTabs: React.FC<LanguagePickerProps> = ({
   groupedCountries,
 }) => {
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
-  const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
-  const { language, setLanguage } = useLocalizationStore();
+  const [filteredCountries, setFilteredCountries] = useState<Country[] | null>(
+    null
+  );
+  const { setLanguage } = useLocalizationStore();
 
   useEffect(() => {
     setActiveRegion(Object.keys(groupedCountries)[0] || null);
@@ -41,10 +43,10 @@ const LanguagePickerWithTabs: React.FC<LanguagePickerProps> = ({
         onSelectTab={handleTabSelect}
       />
       <div>
-        {filteredCountries.length === 0 && (
+        {filteredCountries?.length === 0 && (
           <div>No countries found for this region.</div>
         )}
-        {filteredCountries.length > 0 && (
+        {filteredCountries?.length && (
           <ul className="grid grid-cols-2 gap-4" role="list">
             {filteredCountries.map((country) => (
               <li

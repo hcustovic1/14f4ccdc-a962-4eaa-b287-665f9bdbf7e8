@@ -1,13 +1,10 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+'use client';
 
-const inter = Inter({ subsets: ["latin"] });
+import { Inter } from 'next/font/google';
+import './globals.css';
+import NavigationBar from '@/components/NavigationBar';
 
-export const metadata: Metadata = {
-  title: "Language Picker App",
-  description: "An app which serves as a showcase of language picker UI component",
-};
+const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
@@ -16,7 +13,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <NavigationBar />
+        {children}
+      </body>
     </html>
   );
 }
