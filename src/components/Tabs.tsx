@@ -21,11 +21,11 @@ export const Tabs: React.FC<TabsProps> = ({
   };
 
   return (
-    <nav className="flex space-x-4 py-1 justify-around" aria-label="Tabs">
+    <nav className="flex flex-wrap justify-around" aria-label="Tabs">
       {tabs.map((tab) => (
         <button
           key={tab}
-          className={`px-4 py-2 mx-2 font-medium focus:outline-none ${
+          className={`px-4 py-2 m-2 font-medium focus:outline-none ${
             activeTab === tab
               ? 'text-blue-500 border-b-2 border-blue-500'
               : 'text-gray-500'
