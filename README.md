@@ -45,3 +45,21 @@ This project uses the following environment variables:
 
 - Description: The URL of the API that provides countries data.
 - Type: string
+
+## Out of Scope Functionalities
+
+### Tailwind Component Library and Global Styles
+
+- Description: This application does not include a component library or global styles written in Tailwind CSS.
+
+### UI Testing with Storybook
+
+- Description: This application does not include UI testing with Storybook.
+
+### Integration Testing
+
+- Description: This application does not include integration tests.
+
+### Nicer UI
+
+- Description: While the UI is functional, it is not designed to be aesthetically pleasing or visually appealing. This is out of scope for this project.
