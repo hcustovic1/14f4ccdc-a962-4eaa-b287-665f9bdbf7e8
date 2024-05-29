@@ -1,42 +1,82 @@
-import { Country } from '@/types';
-import { fetchCountries } from '@/api/fetchCountries';
+import React, { useEffect, useState } from 'react';
+import Tabs from './Tabs';
+import { Country, GroupedCountries } from '@/types';
+import Image from 'next/image';
+import { getCountryFlagUrl } from '@/utils/getCountryFlagUrl';
 import { useLocalizationStore } from '@/store/useLocalizationStore';
-import { useEffect, useState } from 'react';
 
-export default function LanguagePicker() {
-  const [countries, setCountries] = useState<Array<Country>>([]);
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    useLocalizationStore((state) => state.language)
-  );
+interface LanguagePickerProps {
+  groupedCountries: GroupedCountries;
+}
+
+const LanguagePickerWithTabs: React.FC<LanguagePickerProps> = ({
+  groupedCountries,
+}) => {
+  const [activeRegion, setActiveRegion] = useState<string | null>(null);
+  const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
+  const { language, setLanguage } = useLocalizationStore();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const countriesData = await fetchCountries();
-        setCountries(countriesData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
+    setActiveRegion(Object.keys(groupedCountries)[0] || null);
+  }, [groupedCountries]);
+
+  useEffect(() => {
+    if (activeRegion) {
+      setFilteredCountries((groupedCountries[activeRegion] as Country[]) || []);
+    }
+  }, [activeRegion, groupedCountries]);
+
+  const handleTabSelect = (region: string) => {
+    setActiveRegion(region);
+  };
+
+  const handleCountryClick = (countryCode: string) => {
+    setLanguage(countryCode);
+  };
 
   return (
-    <div>
-      <h1>Language Picker</h1>
-      <select
-        value={selectedLanguage}
-        onChange={(event) => {
-          setSelectedLanguage(event.target.value);
-          useLanguageStore.getState().setLanguage(event.target.value);
-        }}
-      >
-        {countries.map((country) => (
-          <option key={country.alpha_2} value={country.alpha_2}>
-            {country.name}
-          </option>
-        ))}
-      </select>
+    <div className="flex flex-col space-y-4">
+      <Tabs
+        tabs={Object.keys(groupedCountries)}
+        onSelectTab={handleTabSelect}
+      />
+      <div>
+        {filteredCountries.length === 0 && (
+          <div>No countries found for this region.</div>
+        )}
+        {filteredCountries.length > 0 && (
+          <ul className="grid grid-cols-2 gap-4" role="list">
+            {filteredCountries.map((country) => (
+              <li
+                key={country.id}
+                className="cursor-pointer"
+                onClick={() => handleCountryClick(country?.['alpha-2'])}
+              >
+                <button
+                  className="flex items-center space-x-2 w-full text-left focus:outline-none focus:ring focus:ring-blue-300"
+                  onClick={() => handleCountryClick(country?.['alpha-2'])}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleCountryClick(country?.['alpha-2']);
+                    }
+                  }}
+                >
+                  <Image
+                    src={getCountryFlagUrl(country?.['alpha-2'])}
+                    alt={`Flag of ${country.name}`}
+                    width={25}
+                    height={25}
+                    className="w-6 h-4"
+                  />
+                  <span>{country.name}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
-}
+};
+
+export default LanguagePickerWithTabs;
