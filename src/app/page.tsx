@@ -1,8 +1,9 @@
 'use client';
 
-import LanguagePickerWithTabs from '@/components/LanguagePicker';
+import { LanguagePickerWithTabs } from '@/components/LanguagePickerWithTabs';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useFetchCountries } from '@/hooks/useFetchCountries';
+import { useLocalizationStore } from '@/store/useLocalizationStore';
 import { GroupedCountries } from '@/types';
 import { groupCountriesByRegion } from '@/utils/groupCountriesByRegion';
 import { useEffect, useState } from 'react';
@@ -12,6 +13,7 @@ export default function Home() {
   const [groupedCountries, setGroupedCountries] = useState<GroupedCountries>(
     {}
   );
+  const { shouldShowLanguagePicker } = useLocalizationStore();
 
   useEffect(() => {
     if (countries) {
@@ -33,7 +35,7 @@ export default function Home() {
         </div>
       )}
 
-      {!loading && !error && (
+      {!loading && !error && shouldShowLanguagePicker && (
         <LanguagePickerWithTabs groupedCountries={groupedCountries} />
       )}
 

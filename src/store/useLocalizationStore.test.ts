@@ -1,7 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { useLocalizationStore } from './useLocalizationStore';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { Country } from '@/types';
 import { act } from 'react';
 
 describe('useLanguageStore', () => {
@@ -20,14 +19,11 @@ describe('useLanguageStore', () => {
     expect(result.current.language).toBe(newLanguage);
   });
 
-  it('should update countries', async () => {
+  it('should change the shouldShowLanguagePicker value', async () => {
     const { result } = renderHook(() => useLocalizationStore());
 
-    const newCountries: Partial<Country>[] = [
-      { name: 'Germany', 'alpha-2': 'DE' },
-    ];
-    act(() => result.current.setCountries(newCountries as Country[]));
+    act(() => result.current.setShouldShowLanguagePicker(true));
 
-    expect(result.current.countries).toEqual(newCountries);
+    expect(result.current.shouldShowLanguagePicker).toBe(true);
   });
 });

@@ -3,10 +3,15 @@ import React, { useState } from 'react';
 interface TabsProps {
   tabs: string[];
   onSelectTab: (tab: string) => void;
+  initialActiveTab: string | null;
 }
 
-const Tabs: React.FC<TabsProps> = ({ tabs, onSelectTab }) => {
-  const [activeTab, setActiveTab] = useState<string | null>(tabs[0]);
+export const Tabs: React.FC<TabsProps> = ({
+  tabs,
+  onSelectTab,
+  initialActiveTab,
+}) => {
+  const [activeTab, setActiveTab] = useState<string | null>(initialActiveTab);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -14,11 +19,11 @@ const Tabs: React.FC<TabsProps> = ({ tabs, onSelectTab }) => {
   };
 
   return (
-    <nav className="flex space-x-4" aria-label="Tabs">
+    <nav className="flex space-x-4 justify-between" aria-label="Tabs">
       {tabs.map((tab) => (
         <button
           key={tab}
-          className={`px-4 py-2 font-medium focus:outline-none ${
+          className={`px-4 py-2 mx-2 font-medium focus:outline-none ${
             activeTab === tab
               ? 'text-blue-500 border-b-2 border-blue-500'
               : 'text-gray-500'
@@ -32,5 +37,3 @@ const Tabs: React.FC<TabsProps> = ({ tabs, onSelectTab }) => {
     </nav>
   );
 };
-
-export default Tabs;
