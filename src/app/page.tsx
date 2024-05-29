@@ -2,7 +2,6 @@
 
 import LanguagePickerWithTabs from '@/components/LanguagePicker';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
-import NavigationBar from '@/components/NavigationBar';
 import { useFetchCountries } from '@/hooks/useFetchCountries';
 import { GroupedCountries } from '@/types';
 import { groupCountriesByRegion } from '@/utils/groupCountriesByRegion';

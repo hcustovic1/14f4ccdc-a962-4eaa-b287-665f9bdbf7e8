@@ -16,5 +16,5 @@ export interface Country {
 export type Fetch = typeof fetch;
 
 export type GroupedCountries = {
-  [key: string]: Array<Pick<Country, 'id' | 'name' | 'region'>>;
+  [key: string]: Array<Pick<Country, 'id' | 'name' | 'region' | 'alpha-2'>>;
 };

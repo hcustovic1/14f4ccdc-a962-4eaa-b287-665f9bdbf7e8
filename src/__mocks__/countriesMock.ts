@@ -7,11 +7,11 @@ export const mockCountries: Array<Partial<Country>> = [
 
 export const groupedCountriesMock: GroupedCountries = {
   Europe: [
-    { id: 1, name: 'Germany', region: 'Europe' },
-    { id: 2, name: 'France', region: 'Europe' },
+    { id: 1, name: 'Germany', region: 'Europe', 'alpha-2': 'DE' },
+    { id: 2, name: 'France', region: 'Europe', 'alpha-2': 'FR' },
   ],
   Asia: [
-    { id: 3, name: 'Japan', region: 'Asia' },
-    { id: 4, name: 'China', region: 'Asia' },
+    { id: 3, name: 'Japan', region: 'Asia', 'alpha-2': 'JP' },
+    { id: 4, name: 'China', region: 'Asia', 'alpha-2': 'CN' },
   ],
 };

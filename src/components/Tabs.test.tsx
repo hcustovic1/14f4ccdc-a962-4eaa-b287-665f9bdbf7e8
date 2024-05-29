@@ -47,4 +47,25 @@ describe('<Tabs />', () => {
     expect(tabButton).toHaveClass('border-b-2');
     expect(tabButton).toHaveClass('border-blue-500');
   });
+
+  it('has the correct aria attributes for accessibility', () => {
+    const tabs = ['Tab 1', 'Tab 2', 'Tab 3'];
+    const onSelectTab = vi.fn();
+
+    const { getByText } = render(
+      <Tabs tabs={tabs} onSelectTab={onSelectTab} />
+    );
+
+    const tabButton = getByText('Tab 2');
+    fireEvent.click(tabButton);
+
+    tabs.forEach((tab) => {
+      const tabButton = getByText(tab);
+      if (tab === 'Tab 2') {
+        expect(tabButton).toHaveAttribute('aria-current', 'page');
+      } else {
+        expect(tabButton).not.toHaveAttribute('aria-current');
+      }
+    });
+  });
 });

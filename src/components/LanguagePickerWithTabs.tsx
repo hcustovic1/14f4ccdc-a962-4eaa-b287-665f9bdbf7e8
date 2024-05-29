@@ -9,7 +9,7 @@ interface LanguagePickerProps {
   groupedCountries: GroupedCountries;
 }
 
-const LanguagePickerWithTabs: React.FC<LanguagePickerProps> = ({
+export const LanguagePickerWithTabs: React.FC<LanguagePickerProps> = ({
   groupedCountries,
 }) => {
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
@@ -80,5 +80,3 @@ const LanguagePickerWithTabs: React.FC<LanguagePickerProps> = ({
     </div>
   );
 };
-
-export default LanguagePickerWithTabs;
